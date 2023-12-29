@@ -1,0 +1,114 @@
+.auth-form {
+    max-width: 346px;
+    width: 100%;
+    margin: 0 auto;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 14px;
+    padding: 24px;
+    border-radius: 24px;
+}
+
+.auth-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .5);
+    padding: 0 20px;
+}
+
+.auth-form__title {
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.auth-form__mode-switcher {
+    font-size: 14px;
+    color: #2654ff;
+    cursor: pointer;
+    text-align: center;
+}
+
+.auth-form__first-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.input {
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    background: #f1efef;
+    font-size: 15px;
+  }
+
+.auth-form__auth-btn{
+    width: 100%;
+    font-weight: 600;
+    background-color: #436af3;
+    color: #fff;
+    text-align: center;
+    padding: 9px 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.closeBtn {
+    cursor: pointer;
+}
+
+.role-selection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .role-selection label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    cursor: pointer;
+  }
+  
+  .role-selection input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    outline: none;
+    margin-right: 5px;
+  }
+  
+  .role-selection input[type="radio"]:checked {
+    background-color: #436af3;
+    border-color: #436af3;
+  }
+  
+  .role-selection span {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+  }
+
+  .error{
+    color: #ec4a4a;
+  }
+
+  .role-selection label{
+    display: flex;
+    align-items: center;
+  }
+
+  .role-selection input{
+    margin: 0;
+  }
