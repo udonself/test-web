@@ -9,6 +9,7 @@
     gap: 14px;
     padding: 24px;
     border-radius: 24px;
+    z-index: 999;
 }
 
 .auth-wrapper {
@@ -20,6 +21,7 @@
     align-items: center;
     background-color: rgba(0, 0, 0, .5);
     padding: 0 20px;
+    z-index: 999;
 }
 
 .auth-form__title {
@@ -111,4 +113,28 @@
 
   .role-selection input{
     margin: 0;
+  }
+
+
+  .categories-choose {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 15px;
+  }
+
+  .categories-choose input {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .categories-choose label {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+    margin-bottom: 5px;
+  }
+  .categories-choose__title {
+    font-weight: 500;
+    font-size: 22px;
+    text-decoration: underline;
   }

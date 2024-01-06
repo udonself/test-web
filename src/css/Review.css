@@ -1,0 +1,39 @@
+.review {
+    width: 100%;
+    padding: 12px 17px;
+    border-radius: 20px;
+    background: #fff;
+    margin-top: 20px;
+}
+.review__row {
+    display: flex;
+    justify-content: space-between;
+}
+.review__column {
+    display: flex;
+    align-items: center;
+    align-items: flex-start;
+}
+.review__from-username{
+    font-weight: 600;
+    text-decoration: none;
+}
+.review .content-row {
+    width: 100%;
+    /* margin-top: 5px; */
+}
+
+.review__from-avatar {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.review__username-mark {
+    margin-left: 15px;
+    margin-top: 6px;
+}
+.review__rating{
+    margin-top: 5px;
+}

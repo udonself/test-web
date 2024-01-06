@@ -1,9 +1,10 @@
 import React from 'react';
-import { useState, ChangeEvent} from 'react';
+import { useState, useEffect, ChangeEvent} from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 import { API_BASE_URL } from '../config';
 import '../css/AuthForm.css';
+import { Category } from '../models/Category';
 import closeIcon from '../images/close_icon.svg';
 import { log } from 'console';
 
@@ -18,7 +19,8 @@ type UserRole = 'customer' | 'freelancer';
 interface RegisterParams {
     username: string,
     password: string,
-    role: UserRole
+    role: UserRole,
+    categories: Category[] | null
 }
 
 interface LoginParams {
@@ -37,6 +39,19 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
     const [repeatPassword, setRepeatPassword] = useState<string>('');
     const [role, setRole] = useState<UserRole|null>(null);
     const [errorText, setErrorText] = useState<string>('');
+    const [categories, setCategories] = useState<Category[]>([]);
+    const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+
+    useEffect(() => {
+        let categoriesApiUrl = `${API_BASE_URL}/categories/get`;
+        axios.get(categoriesApiUrl)
+          .then(function (response) {
+            setCategories(response.data);
+        })
+          .catch(function (error) {
+            //
+        })
+      }, []);
 
     function changeAuthMode(){
         setAuthMode(authMode === AuthMode.Auth ? AuthMode.Register : AuthMode.Auth);
@@ -45,6 +60,7 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
         setRepeatPassword('');
         setErrorText('');
         setRole(null);
+        setSelectedCategories([]);
     }
     // input handlers 
     const handleLoginChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +77,7 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
     };
     const handleRoleChanged = (event: ChangeEvent<HTMLInputElement>) => {
         console.log(event.target.value);
+        setSelectedCategories([]);
         if(event.target.value == 'freelancer') setRole('freelancer');
         else if(event.target.value == 'customer') setRole('customer');
         console.log(role);
@@ -93,11 +110,16 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
             setErrorText('Длина пароля должна быть не менее 7 символов!');
             return;
         }
+        else if (role === 'freelancer' && selectedCategories.length === 0){
+            setErrorText('Выберите ваши направления!');
+            return;
+        }
         let registerApiUrl = `${API_BASE_URL}/users/register`;
         let registerParams: RegisterParams = {
             username: login,
             password: password,
-            role: role
+            role: role,
+            categories: selectedCategories
         }
         axios.post(registerApiUrl, registerParams)
           .then(function (response) {
@@ -146,6 +168,20 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
         }
     }
 
+
+    const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>, category: Category) => {
+        const isChecked = event.target.checked;
+    
+        if (isChecked) {
+          setSelectedCategories((prevSelectedCategories) => [...prevSelectedCategories, category]);
+        } else {
+          setSelectedCategories((prevSelectedCategories) =>
+            prevSelectedCategories.filter((selectedCategory) => selectedCategory.id !== category.id)
+          );
+        }
+        console.log(selectedCategories.map(category => category.id));
+      };
+
     return(
         <div className="auth-wrapper" onMouseDown={handleWrapperClick}>
             <div className='auth-form'>
@@ -169,6 +205,28 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
                     </div>
                     : ''
                 }
+                
+                {
+                    role === 'freelancer' ?
+                        <div className='categories-choose'>
+                            <span className="categories-choose__title">Укажите ваши направления</span>
+                            {categories.map((category) => (
+                                <div>
+                                    <label key={category.id}>
+                                    <input
+                                        type="checkbox"
+                                        checked={selectedCategories.some((selectedCategory) => selectedCategory.id === category.id)}
+                                        onChange={(e) => handleCheckboxChange(e, category)}
+                                    />
+                                    {category.name}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                    : ''
+                }
+                
+
                 <input className='auth-form__login-input input' onChange={handleLoginChange} placeholder='Логин' type="text" value={login}/>
                 <input className='auth-form__password-input input' onChange={handlePasswordChange} placeholder='Пароль' type="password" value={password}/>
                 {authMode === AuthMode.Register ? <input className='auth-form__repeat-password-input input' onChange={handleRepeatPasswordChange} placeholder='Повтор пароля' type="password" value={repeatPassword} /> : ''}

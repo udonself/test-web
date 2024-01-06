@@ -1,0 +1,114 @@
+
+.target-freelancer-page {
+    display: flex;
+    flex-direction: column;
+    padding: 50px 20px!important;
+}
+
+.user-card {
+    background: #fff;
+    padding: 20px 50px;
+    border-radius: 20px;
+}
+
+.user-card__row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.user-card__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-card__avatar-container {
+    position: relative;
+}
+
+.user-card__avatar {
+    width: 200px;
+    height: 200px;
+    /* height: 30%; */
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user-card__rating {
+    background: #ffffff;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: 1px #a7a7a7 solid;
+    border-radius: 20px;
+    font-size: 20px;
+    padding: 2px 4px;
+}
+
+.user-card__username {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.user-card__role {
+    text-align: center;
+    font-size: 23px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.category-column {
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.user-card__category {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+.user-card__category img {
+    width: 50px;
+}
+
+.user-card__message-btn {
+    border-radius: 20px;
+    background: #eee;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 5px 22px;
+}
+
+.message-column {
+    padding-left: 250px;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    /* gap: 20px; */
+}
+
+
+@media (max-width: 662px){
+    .user-card__username {
+        font-size: 35px;
+    }
+    .user-card__row {
+        justify-content: center;
+        /* align-items: center; */
+    }
+    .user-card__role {
+        /* margin: 0 auto; */
+        margin-top: 20px;
+        font-size: 30px;
+    }
+    .message-column {
+        padding: 0;
+        margin-top: 15px;
+    }
+}

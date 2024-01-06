@@ -1,9 +1,11 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import TasksPage from './TasksPage';
 import Header from './Header';
 import Footer from './Footer';
+import TasksPage from './TasksPage';
+import FreelancersPage from './FreelancersPage';
+import UserPage from './UserPage';
 import '../css/App.css';
 
 function App() {
@@ -14,6 +16,8 @@ function App() {
             <Routes>
               <Route path="/" />
               <Route path="/tasks" element={<TasksPage />}/>
+              <Route path="/freelancers" element={<FreelancersPage />}/>
+              <Route path="/users/:id" element={<UserPage />}/>
             </Routes>
         <Footer />
       </BrowserRouter>
