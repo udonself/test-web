@@ -5,6 +5,10 @@
     padding: 50px 20px!important;
 }
 
+.star {
+    cursor: pointer;
+}
+
 .user-card {
     background: #fff;
     padding: 20px 50px;
@@ -93,6 +97,57 @@
     /* gap: 20px; */
 }
 
+.reviews-title {
+    margin-bottom: 0;
+    margin-top: 20px;
+    font-size: 23px;
+}
+
+/* / */
+.add-review {
+    width: 100%;
+    border-radius: 20px;
+    background: #fff;
+    margin-top: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.add-review__title {
+    font-size: 20px;
+    margin: 0;
+}
+.add-review__send-btn {
+    font-size: 18px;
+    border-radius: 5px;
+    background: #1090CB;
+    color: #fff;
+    font-weight: 400;
+    width: 130px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.add-review__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+.add-review__input {
+    width: calc(100% - 10px - 130px);
+    height: 40px;
+    border-radius: 5px;
+    outline: none;
+}
+.add-review .content-row {
+    justify-content: space-between;
+}
+.add-review__rating {
+    margin-left: 8px;
+}
 
 @media (max-width: 662px){
     .user-card__username {
@@ -110,5 +165,17 @@
     .message-column {
         padding: 0;
         margin-top: 15px;
+    }
+    
+    .add-review__input {
+        width: 100%;
+    }
+    .add-review__row {
+        flex-direction: column;
+        gap: 10px;
+        align-items: flex-start;
+    }
+    .add-review__rating {
+        margin: 0;
     }
 }

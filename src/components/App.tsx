@@ -8,7 +8,8 @@ import FreelancersPage from './FreelancersPage';
 import UserPage from './UserPage';
 import '../css/App.css';
 
-function App() {
+
+export default function App() {
   return (
     <div className="App">
       <BrowserRouter basename="/">
@@ -25,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+

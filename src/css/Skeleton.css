@@ -1,0 +1,11 @@
+.skeleton-user-card {
+    height: 177px;
+    background-size: 1110px 177px;
+    margin-top: 25px;
+}
+
+.skeleton-task-card {
+    height: 146px;
+    background-size: 1110px 177px;
+    margin-top: 25px;
+}

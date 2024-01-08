@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 
 import { API_BASE_URL } from '../config';
 import FreelancerInfo from './FreelancerInfo';
+import {SkeletonUserCard} from '../components/Skeleton';
 import { Freelancer } from '../models/Freelancer';
 import '../css/FreelancersPage.css';
 
@@ -38,16 +39,20 @@ function FreelancersPage() {
 
     return (
         <div className="freelancers-page container">
-            {freelancers.map(freelancer => <FreelancerInfo {...freelancer}/>)}
-            <ReactPaginate className='pagination'
-              breakLabel="..."
-              nextLabel=">"
-              onPageChange={handlePageClick}
-              // pageRangeDisplayed={1}
-              pageCount={totalPages}
-              previousLabel="<"
-              renderOnZeroPageCount={null}
-            />
+            {
+              freelancers.length === 0 ? 
+                <>{[1,2,3,4,5,6].map((number) => <SkeletonUserCard />)}</>
+              :
+              freelancers.map(freelancer => <FreelancerInfo {...freelancer}/>)}
+              <ReactPaginate className='pagination'
+                breakLabel="..."
+                nextLabel=">"
+                onPageChange={handlePageClick}
+                // pageRangeDisplayed={1}
+                pageCount={totalPages}
+                previousLabel="<"
+                renderOnZeroPageCount={null}
+              />
         </div>
     );
 }

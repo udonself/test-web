@@ -7,6 +7,7 @@ import ReactPaginate from 'react-paginate';
 import { API_BASE_URL } from '../config';
 import { Task } from '../models/Task';
 import TaskInfo from './TaskInfo';
+import {SkeletonTaskCard} from '../components/Skeleton';
 import '../css/TasksPage.css';
 
 
@@ -44,16 +45,20 @@ function TasksPage() {
     return (
         <div className="task-page container">
             <input className='search-input' placeholder='Поиск заказов' type="text" onChange={searchInputChanged}/>
-            {tasks.map(task => <TaskInfo {...task}/>)}
-            <ReactPaginate className='pagination'
-              breakLabel="..."
-              nextLabel=">"
-              onPageChange={handlePageClick}
-              // pageRangeDisplayed={1}
-              pageCount={totalPages}
-              previousLabel="<"
-              renderOnZeroPageCount={null}
-            />
+            {
+              tasks.length === 0 ? 
+                <>{[1,2,3,4,5,6].map((number) => <SkeletonTaskCard />)}</>
+              :
+                tasks.map(task => <TaskInfo {...task}/>)}
+                <ReactPaginate className='pagination'
+                  breakLabel="..."
+                  nextLabel=">"
+                  onPageChange={handlePageClick}
+                  // pageRangeDisplayed={1}
+                  pageCount={totalPages}
+                  previousLabel="<"
+                  renderOnZeroPageCount={null}
+                />
         </div>
     );
 }
