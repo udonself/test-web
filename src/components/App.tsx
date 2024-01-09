@@ -6,6 +6,7 @@ import Footer from './Footer';
 import TasksPage from './TasksPage';
 import FreelancersPage from './FreelancersPage';
 import UserPage from './UserPage';
+import ConversationPage from './ConversationPage';
 import '../css/App.css';
 
 
@@ -19,6 +20,7 @@ export default function App() {
               <Route path="/tasks" element={<TasksPage />}/>
               <Route path="/freelancers" element={<FreelancersPage />}/>
               <Route path="/users/:id" element={<UserPage />}/>
+              <Route path="/conversation/:id" element={<ConversationPage />}/>
             </Routes>
         <Footer />
       </BrowserRouter>

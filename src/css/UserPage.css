@@ -149,6 +149,11 @@
     margin-left: 8px;
 }
 
+.user-card__link-to-conversation {
+    text-decoration: none;
+    color: #000;
+}
+
 @media (max-width: 662px){
     .user-card__username {
         font-size: 35px;

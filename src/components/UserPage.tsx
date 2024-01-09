@@ -129,9 +129,11 @@ function UserPage() {
                                     }
                                 </div>
                                 <div className="user-card__column message-column">
-                                    <div className="user-card__message-btn">
-                                        Написать
-                                    </div>
+                                    <Link className='user-card__link-to-conversation' to={`/conversation/${id}`}>
+                                        <div className="user-card__message-btn">
+                                            Написать
+                                        </div>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
