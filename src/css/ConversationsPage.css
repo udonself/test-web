@@ -1,0 +1,23 @@
+
+.conversations-page {
+    /* margin-top: 25px; */
+    padding: 25px 20px!important;
+}
+
+.conversations-wrapper {
+    /* width: 100%; */
+    background: #fff;
+    border-radius: 15px;
+    /* padding: 20px; */
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.conversations-wrapper__title {
+   margin: 0;
+   margin-left: 30px;
+   margin-top: 20px;
+   padding-bottom: 17px;
+}

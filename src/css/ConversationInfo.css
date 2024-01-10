@@ -1,0 +1,54 @@
+
+.conversation-info {
+    width: 100%;
+    height: 100px;
+    border-top: 1px #D9D9D9 solid;
+    padding: 5px 30px;
+    text-decoration: none;
+}
+
+.conversation-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.conversation-info__avatar {
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.conversation-info__column {
+    display: flex;
+    flex-direction: column;
+}
+
+.conversation-info__last_date {
+    color: #969696;
+    text-decoration: none;
+}
+
+.conversation-info__description {
+    display: flex;
+    flex-direction: column;
+    margin-left: 20px;
+}
+
+.userinfo-column {
+    flex-direction: row;
+}
+
+.conversation-info__username {
+    margin: 0;
+    margin-top: 6px;
+    text-decoration: none;
+    color: #000;
+    font-size: 27px;
+}
+
+.conversation-info__last_message {
+    text-decoration: none;
+    color: #969696;
+}

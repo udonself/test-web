@@ -35,7 +35,7 @@
 }
 
 .conv__messages {
-    max-height: 450px;
+    height: 450px;
     overflow-y: scroll;
     display: flex;
     flex-direction: column;

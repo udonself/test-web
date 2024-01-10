@@ -28,6 +28,9 @@ const DropNavbar: React.FC<DropNavbarProps> = ({setOpenStatus, handleProfileButt
                     <li>
                         <Link to='/freelancers' onClick={closeMenu}>Исполнители</Link>
                     </li>
+                    <li>
+                        <Link to='/messages'>Сообщения</Link>
+                    </li>
                 </ul>
                 <span className="profile-button" onClick={() => {closeMenu(); handleProfileButtonClick()}}>
                     Профиль
@@ -45,7 +48,7 @@ function Header() {
 
     const handleResize = () => {
         const windowWidth = window.innerWidth;
-        if (windowWidth <= 780) {
+        if (windowWidth <= 876) {
             setMobile(true);
             return;
         }
@@ -80,7 +83,9 @@ function Header() {
                 ''
         }
         <div className="header container">
-            <img src={logo} className="logo" alt="logo task link" />
+            <Link to='/'>
+                <img src={logo} className="logo" alt="logo task link" />
+            </Link>
             {mobile ?
                  <img src={menuIcon} alt="" onClick={() => setMobileNavbarOpened(true)}/>
             : 
@@ -91,6 +96,9 @@ function Header() {
                     </li>
                     <li>
                         <Link to='/freelancers'>Исполнители</Link>
+                    </li>
+                    <li>
+                        <Link to='/messages'>Сообщения</Link>
                     </li>
                 </ul>
                 <span className="profile-button" onClick={handleProfileBtnClick}>

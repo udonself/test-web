@@ -2,7 +2,7 @@
 .target-freelancer-page {
     display: flex;
     flex-direction: column;
-    padding: 50px 20px!important;
+    padding: 25px 20px!important;
 }
 
 .star {

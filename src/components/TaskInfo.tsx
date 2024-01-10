@@ -12,7 +12,7 @@ const TaskInfo: React.FC<Task> = ({id, category, title, responses, created}) => 
       <Link to={`/tasks/${id}`} className="task-info">
         <div className="task-info__row">
           <div className="task-info__title">{title}</div>
-          <div className="task-info__responses">{responses} откликов</div>
+          {/* <div className="task-info__responses">{responses} откликов</div> */}
           <div className="task-info__category">{category}</div>
         </div>
         <div className="task-info__row price-row">

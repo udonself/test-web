@@ -79,12 +79,12 @@
     padding: 0;
 }
 .mobile-navlist li a {
-    font-size: 30px;
+    font-size: 20px;
 }
 .mobile-navbar .profile-button {
-    font-size: 30px;
-    width: 80%;
-    height: 100px;
+    font-size: 20px;
+    width: 50%;
+    height: 50px;
 }
 .mobile-navlist {
     flex-direction: column;
@@ -95,4 +95,7 @@
     margin: 25px 25px 0 0;
 }
 
+.logo {
+    cursor: pointer;
+}
 /* @media (min-width: ) */

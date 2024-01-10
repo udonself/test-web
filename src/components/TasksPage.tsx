@@ -44,7 +44,10 @@ function TasksPage() {
 
     return (
         <div className="task-page container">
+          <div className="task-page__row">
             <input className='search-input' placeholder='Поиск заказов' type="text" onChange={searchInputChanged}/>
+            <Link to='/tasks/create' className="task-page__create-task-btn">Создать заказ</Link>
+          </div>
             {
               tasks.length === 0 ? 
                 <>{[1,2,3,4,5,6].map((number) => <SkeletonTaskCard />)}</>
