@@ -83,7 +83,7 @@ const ConversationPage = () => {
                     {
                     conversationInfo ? 
                         Object.keys(conversationInfo.messages_grouped_by_date).length === 0 ?
-                            <h1 className="conv__null-info">У вас пока нет сообщений. Начните общаться!</h1>
+                            <h1 className="conv__null-info">У вас пока нет сообщений. Начните обсуждать заказы!</h1>
                             :
                             Object.keys(conversationInfo.messages_grouped_by_date).map(date => 
                                 <div className="conv__message-for-date">

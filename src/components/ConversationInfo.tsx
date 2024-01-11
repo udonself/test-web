@@ -6,10 +6,12 @@ import '../css/ConversationInfo.css';
 
 
 const ConversationInfo: React.FC<ConversationInfoModel> = ({companion_id, companion_username, companion_avatar, last_message, last_date}) => {
+    
     const resolveContent = (message: string) => {
         if (message.length < 17) return message;
         return message.substring(0, 17) + '...';
     }
+    
     return (
         <Link to={`/conversation/${companion_id}`} className="conversation-info">
             <div className="conversation-info__column userinfo-column">

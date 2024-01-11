@@ -31,9 +31,15 @@ const ConversationsPage = () => {
            <div className="conversations-wrapper">
                 <h1 className='conversations-wrapper__title'>Ваши переписки</h1>
                 {
-                    conversations ?
+                    conversations
+                    ?
+                      conversations.length === 0
+                      ?
+                        <div className='conversations-wrapper__info'>У вас пока нет переписок!</div>
+                      :
                         conversations.map(conv => <ConversationInfo {...conv}/>)
-                    : ''
+                    :
+                      <div className='conversations-wrapper__info'>Загрузка...</div>
                 }
            </div>
         </div>

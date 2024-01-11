@@ -1,18 +1,37 @@
 import axios from 'axios';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link, redirect } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { API_BASE_URL } from '../config';
 import yellowStar from '../images/yellow-star.svg';
 import grayStar from '../images/gray-star.svg';
+import editIcon from '../images/edit.svg';
+import exitIcon from '../images/exit.svg';
 import { ProfileInfo } from '../models/ProfileInfo';
 import {UserReview} from '../models/ProfileInfo';
 import Review from './Review';
 import useAxiosHeader from '../customHooks/useAxiosHeader';
 import Popup from './Popup';
 import '../css/UserPage.css';
+import Cookies from 'js-cookie';
+
+
+const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        resolve(base64.split(',')[1]);
+      };
+      reader.onerror = () => {
+        reject(new Error('Error occurred while reading the file.'));
+      };
+      reader.readAsDataURL(file);
+    });
+  };
 
 
 function UserPage() {
@@ -28,6 +47,64 @@ function UserPage() {
     const [reviewRating, setReviewRating] = useState<number>(0);
     const [starsList, setStarsList] = useState<any[]>([1,2,3,4,5].map(value => <img className='star' key={value} src={grayStar} onClick={() => handleRatingChanged(value)}/>)); // list of star images
     const [reviewText, setReviewTest] = useState<string>('');
+
+    // states for profile edit (if user is owner of its profile)
+    const [profileOwner, setProfileOwner] = useState<boolean>(true);
+    const [usernameEditing, setUsernameEditing] = useState<boolean>(false);
+    const [changedUsername, setChangedUsername] = useState<string>('');
+    const [selectedImage, setSelectedImage] = useState<File | null>(null);
+    const fileInputRef = useRef<HTMLInputElement>(null);
+
+    const navigate = useNavigate();
+
+    const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files && event.target.files[0];
+    
+        if (file && (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg')) {
+          setSelectedImage(file);
+            fileToBase64(file).then(base64 => {
+                console.log(base64);
+                if (!header) return;
+                const data = {base64avatar: base64};
+                const response = axios.post(`${API_BASE_URL}/users/changeAvatar`, data, { headers: header});
+                });
+            // console.log(base64);
+        }
+        else {
+          setSelectedImage(null);
+        }
+      };
+
+      const handleImageClick = () => {
+        if (fileInputRef.current) {
+          fileInputRef.current.click();
+        }
+      };
+
+
+    const exitFromAccount = () => {
+        Cookies.remove('token');
+        navigate('/');
+    }
+
+    const handleChangeUsernameClick = () => {
+        if(changedUsername !== profileInfo?.username) {
+            console.log('Надо менять!');
+            if (!header) return;
+            let sendMessageApiUrl = `${API_BASE_URL}/users/changeUsername`;
+            const data = {
+                new_username: changedUsername
+                };
+            const response = axios.post(sendMessageApiUrl, data, { headers: header});
+            setTimeout(functionForUseEffect, 500);
+        }
+        else {
+            console.log('Не надо менять!');
+        }
+        setChangedUsername(profileInfo ? profileInfo.username : '');
+        setUsernameEditing(!usernameEditing);
+    }
+
 
     const handleRatingChanged = (newRating: number) => {
         let newStarsList: any[] = [];
@@ -73,20 +150,36 @@ function UserPage() {
     }
 
     const functionForUseEffect = () => {
+        setProfileOwner(false);
+        setChangedUsername('');
+        setUsernameEditing(false);
         let profileApiUrl = `${API_BASE_URL}/users/${id}`;
         axios.get(profileApiUrl)
           .then(function (response) {
             console.log(response);
             setProfileInfo(response.data);
+            setChangedUsername(response.data.username);
         })
           .catch(function (error) {
             console.log(error);
+        }).then(() => {
+            if(header){
+                axios.get(`${API_BASE_URL}/users/me`, {headers: header}).then(response => {
+                    setProfileOwner(id == response.data.id);
+                    // console.log(id === response.data.id);
+                }).catch(error =>{
+                    console.log(':(');
+                }) ;
+            }
+            else {
+                console.log('!header');
+            }
         })
     }
 
     useEffect(() => {
         functionForUseEffect();
-      }, [id]);
+      }, [id, header]);
 
     return (
         <>
@@ -94,20 +187,47 @@ function UserPage() {
                 {
                     profileInfo ? 
                         <div className="user-card">
+                            {
+                                profileOwner ? 
+                                    <img onClick={() => exitFromAccount()} className='user-card__exit-btn' src={exitIcon} alt="exit" />
+                                : ''
+                            }
                             <div className="user-card__row">
                                 <div className="user-card__column">
                                     <div className="user-card__avatar-container">
-                                        <img className='user-card__avatar' src={profileInfo.avatar} alt="user avatar" />
+                                        <img className='user-card__avatar' src={selectedImage ? URL.createObjectURL(selectedImage) : profileInfo.avatar} alt="user avatar" />
                                         <div className="user-card__rating">
                                             {profileInfo.avg_rating ? 
                                                 profileInfo.avg_rating.toFixed(2)
                                             : '???'}
                                             ★
                                         </div>
+                                        {
+                                        profileOwner ?
+                                            <label className="custom-file-upload">
+                                                <input type="file" accept=".png, .jpg, .jpeg" onChange={handleImageChange} style={{ display: 'none' }}/>
+                                                <img className='user-card__edit-avatar-btn' onClick={handleImageClick} src={editIcon} alt="Upload" width="24" height="24" />
+                                            </label>
+                                        : ''
+                                        }
                                     </div>
-                                    <p className='user-card__username'>
-                                        {profileInfo.username}
-                                    </p>
+                                    {
+                                        profileOwner ?
+                                        <div className="user-card__edit-username">
+                                            <img onClick={() => handleChangeUsernameClick()} className='user-card__edit-username-btn' src={editIcon} alt="" />
+                                            {
+                                                usernameEditing ?
+                                                    <textarea className='user-card__edited-username' value={changedUsername} onChange={(e) => setChangedUsername(e.target.value)}></textarea>
+                                                :
+                                                    <span className='user-card__username'>{changedUsername}</span>
+                                            }
+                                        </div>
+                                        :
+                                        <p className='user-card__username'>
+                                            {profileInfo.username}
+                                        </p>
+                                    }
+                                    
                                 </div>
                                 <div className="user-card__column category-column">
                                     {

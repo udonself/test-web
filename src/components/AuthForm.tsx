@@ -1,7 +1,9 @@
 import React from 'react';
 import { useState, useEffect, ChangeEvent} from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+
 import { API_BASE_URL } from '../config';
 import '../css/AuthForm.css';
 import { Category } from '../models/Category';
@@ -41,6 +43,8 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
     const [errorText, setErrorText] = useState<string>('');
     const [categories, setCategories] = useState<Category[]>([]);
     const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         let categoriesApiUrl = `${API_BASE_URL}/categories/get`;
@@ -89,6 +93,14 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
         }
     }
 
+    const checkIdAndRedirect = (token: string) => {
+        axios.get(`${API_BASE_URL}/users/me`, {headers: { Authorization: `Bearer ${token}` }}).then(response => {
+            navigate(`users/${response.data.id}`);
+        }).catch(error =>{
+            setAuthFormOpened(true);
+        }) ;
+    }
+
     function registerAuthRequest() {
         if(role === null) {
             setErrorText('Выберите свою роль!');
@@ -125,6 +137,7 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
           .then(function (response) {
             console.log(response);
             Cookies.set('token', response.data.token);
+            checkIdAndRedirect(response.data.token);
             setAuthFormOpened(false);
         })
           .catch(function (error) {
@@ -147,8 +160,8 @@ const AuthForm: React.FC<AuthFormProps> = ({setAuthFormOpened}) =>{
         axios.get(loginApiUrl, {params: loginParams})
           .then(function (response) {
             console.log(response);
-            // console.log(response.data.token);
             Cookies.set('token', response.data.token);
+            checkIdAndRedirect(response.data.token);
             setAuthFormOpened(false);
         })
           .catch(function (error) {

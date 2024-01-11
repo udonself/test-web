@@ -10,6 +10,7 @@ import ConversationPage from './ConversationPage';
 import MainPage from './MainPage';
 import CreateTaskPage from './CreateTaskPage';
 import ConversationsPage from './ConversationsPage';
+import TaskPage from './TaskPage';
 import '../css/App.css';
 
 
@@ -21,6 +22,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<MainPage />}/>
               <Route path="/tasks" element={<TasksPage />}/>
+              <Route path="/tasks/:id" element={<TaskPage />}/>
               <Route path="/tasks/create" element={<CreateTaskPage />}/>
               <Route path="/freelancers" element={<FreelancersPage />}/>
               <Route path="/users/:id" element={<UserPage />}/>

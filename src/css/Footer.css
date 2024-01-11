@@ -1,19 +1,14 @@
 .footer-wrapper {
     width: 100%;
     background: #fff;
-    /* margin-top: 650px; */
     padding: 20px 0;
+    align-self: flex-end;
 }
 
 .footer {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
-    /* flex-wrap: wrap; */
-}
-
-.footer__column {
-    /* padding: 0 20px; */
 }
 
 .footer__list-title {

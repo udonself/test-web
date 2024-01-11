@@ -13,6 +13,7 @@
     background: #fff;
     padding: 20px 50px;
     border-radius: 20px;
+    position: relative;
 }
 
 .user-card__row {
@@ -61,6 +62,7 @@
     font-size: 23px;
     font-weight: 600;
     margin: 0;
+    align-self: center;
 }
 
 .category-column {
@@ -93,8 +95,7 @@
 
 .reviews {
     display: flex;
-    flex-direction: column;
-    /* gap: 20px; */
+    flex-direction: column-reverse;
 }
 
 .reviews-title {
@@ -103,6 +104,37 @@
     font-size: 23px;
 }
 
+
+.user-card__edit-username {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    justify-content: center;
+}
+
+.user-card__edited-username {
+    height: 40px;
+    border-radius: 20px;
+    padding-top: 9px;
+    font-weight: 600;
+}
+
+.user-card__edit-username-btn {
+    cursor: pointer;
+    width: 25px;
+}
+
+.custom-file-upload {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: pointer;
+}
+
+.user-card__edit-avatar-btn {
+    width: 25px;
+    height: 25px;
+}
 /* / */
 .add-review {
     width: 100%;
@@ -154,6 +186,15 @@
     color: #000;
 }
 
+.user-card__exit-btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
 @media (max-width: 662px){
     .user-card__username {
         font-size: 35px;
@@ -183,4 +224,25 @@
     .add-review__rating {
         margin: 0;
     }
+    .conversation-info__avatar {
+        width: 70px!important;
+        height: 70px!important;
+    }
+    .conversation-info__username {
+        font-size: 15px!important;;
+    }
+    .conversation-info__last_message {
+        font-size: 13px;
+    }
+    .conversation-info__description {
+        margin-top: 7px;
+    }
+    .conversation-info__last_date {
+        font-size: 13px;
+    }
+    
+    .conversation-info {
+        padding: 15px 30px!important;
+    }
+
 }

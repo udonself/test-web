@@ -1,11 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useState, useEffect} from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import AuthForm from './AuthForm';
 import logo from '../images/logo.svg';
 import menuIcon from '../images/menu.svg';
-import closeIcon from '../images/close-nav.svg'
+import closeIcon from '../images/close-nav.svg';
+import { API_BASE_URL } from '../config';
 import '../css/Header.css';
 
 interface DropNavbarProps {
@@ -46,6 +50,8 @@ function Header() {
     const [mobileNavbarOpened, setMobileNavbarOpened] = useState<boolean>();
     const [mobile, setMobile] = useState<boolean>(false);
 
+    const navigate = useNavigate();
+
     const handleResize = () => {
         const windowWidth = window.innerWidth;
         if (windowWidth <= 876) {
@@ -59,7 +65,13 @@ function Header() {
     window.addEventListener('resize', handleResize);
 
     const handleProfileBtnClick = () => {
-        setAuthFormOpened(true);
+        const token: string | undefined = Cookies.get('token');
+        if (!token) setAuthFormOpened(true);
+        axios.get(`${API_BASE_URL}/users/me`, {headers: { Authorization: `Bearer ${token}` }}).then(response => {
+            navigate(`users/${response.data.id}`);
+        }).catch(error =>{
+            setAuthFormOpened(true);
+        }) ;
     }
 
     useEffect(() => {
