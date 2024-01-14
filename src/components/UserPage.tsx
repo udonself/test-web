@@ -88,6 +88,14 @@ function UserPage() {
     }
 
     const handleChangeUsernameClick = () => {
+        if(changedUsername.length < 7) {
+            showPopup('Минимальная длина логина - 7 символов!');
+            return;
+        }
+        if(changedUsername.length > 11) {
+            showPopup('Максимальная длина логина - 11 символов!');
+            return;
+        }
         if(changedUsername !== profileInfo?.username) {
             console.log('Надо менять!');
             if (!header) return;
@@ -131,11 +139,11 @@ function UserPage() {
             return;
         }
         else if(reviewText.length < 10){
-            console.log('Минимальная длина отзыва - 10 символов!');
+            showPopup("Минимальная длина отзыва - 10 символов!");
             return;
         }
         else if(reviewRating == 0) {
-            console.log('Выберите оценку для отзыва!');
+            showPopup("Поставьте оценку отзыву!");
             return;
         }
         let createReviewApiUrl = `${API_BASE_URL}/reviews/create`;
@@ -259,20 +267,25 @@ function UserPage() {
                         </div>
                     : ''
                 }
-                <div className="add-review">
-                    <div className="add-review__row">
-                        <h1 className='add-review__title'>Оставить отзыв</h1>
-                        <div className='review__rating add-review__rating'>
-                            {
-                                starsList.map(star => star)
-                            }
+                {
+                    profileOwner ?
+                        ''
+                    :   
+                    <div className="add-review">
+                        <div className="add-review__row">
+                            <h1 className='add-review__title'>Оставить отзыв</h1>
+                            <div className='review__rating add-review__rating'>
+                                {
+                                    starsList.map(star => star)
+                                }
+                            </div>
                         </div>
-                    </div>
-                    <div className="add-review__row content-row">
-                        <textarea placeholder='Текст отзыва' className='add-review__input' onChange={handleReviewTextChanged}></textarea>
-                        <div className="add-review__send-btn" onClick={() => sendReview()}>Отправить</div>
-                    </div>
-                </div>
+                        <div className="add-review__row content-row">
+                            <textarea placeholder='Текст отзыва' className='add-review__input' onChange={handleReviewTextChanged}></textarea>
+                            <div className="add-review__send-btn" onClick={() => sendReview()}>Отправить</div>
+                        </div>
+                    </div> 
+                }
                 <div className="reviews">
                     {
                         profileInfo ?

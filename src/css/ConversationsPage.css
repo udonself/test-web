@@ -21,3 +21,7 @@
    margin-top: 20px;
    padding-bottom: 17px;
 }
+
+.message__content .content {
+    word-break: break-word;
+}

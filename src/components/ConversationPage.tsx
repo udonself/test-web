@@ -12,10 +12,6 @@ import {MessageOut, ConversationOut} from '../models/Conversation';
 import '../css/ConversationPage.css';
 
 
-const username = 'Elin Hellop';
-const avatar = 'https://telegra.ph/file/3f093e11778b02df8e1c9.png';
-
-
 const ConversationPage = () => {
     const {id} = useParams<{ id: string }>();
     const [profileInfo, setProfileInfo] = useState<ProfileInfo | null>(null);

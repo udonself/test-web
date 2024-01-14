@@ -21,6 +21,7 @@
 .review .content-row {
     width: 100%;
     /* margin-top: 5px; */
+    word-break: break-word;
 }
 
 .review__from-avatar {

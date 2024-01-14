@@ -11,6 +11,7 @@ import MainPage from './MainPage';
 import CreateTaskPage from './CreateTaskPage';
 import ConversationsPage from './ConversationsPage';
 import TaskPage from './TaskPage';
+import AdminPage from './AdminPage';
 import '../css/App.css';
 
 
@@ -28,6 +29,7 @@ export default function App() {
               <Route path="/users/:id" element={<UserPage />}/>
               <Route path="/conversation/:id" element={<ConversationPage />}/>
               <Route path="/messages" element={<ConversationsPage />}/>
+              <Route path="/admin" element={<AdminPage />}/>
             </Routes>
         <Footer />
       </BrowserRouter>

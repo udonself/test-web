@@ -1,0 +1,45 @@
+.admin-page {
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px!important;
+}
+
+.admin {
+    background: #fff;
+    padding: 20px 50px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.admin-category {
+    margin-top: 10px;
+}
+
+
+.admin-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    background: #1090CB;
+    border-radius: 10px;
+    color: #fff;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.admin__add-category-btn {
+    width: 200px;
+}
+
+.admin__verify-btn {
+    width: 300px;
+}
+
+.admin-username-info{
+    color: #00ff37;
+}
+
+.error{
+    color: #ff0d00!important;
+}
